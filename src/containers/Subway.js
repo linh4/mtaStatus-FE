@@ -27,7 +27,6 @@ class Subway extends Component {
     return (
       <div className="App">
         <h2>Hello Subway</h2>
-        <SubwayList />
         {/* {this.handleState()} */}
         <SubwayStops stops={this.handleState} />
       </div>

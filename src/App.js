@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import Subway from './containers/Subway'
+import SubwayList from './components/SubwayList'
 import { connect } from 'react-redux'
 import { fetchMtaData } from './Redux/actioncreators.js'
+import { Route, withRouter } from 'react-router-dom'
 
 
 class App extends Component {
@@ -13,11 +15,11 @@ class App extends Component {
 
     return (
       <div className="App">
-        <h2>Hello World</h2>
-        <Subway />
+        <Route path="/subwayList" component={SubwayList} />
+        <Route path="/trains/:id" component={Subway} />
       </div>
     );
   }
 }
 
-export default connect(null,{ fetchMtaData })(App);
+export default withRouter(connect(null,{ fetchMtaData })(App));

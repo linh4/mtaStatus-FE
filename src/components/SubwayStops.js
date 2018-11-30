@@ -9,7 +9,7 @@ const SubwayStops  = (props) => {
   else {
     return (
       <div>
-        No train selection yet
+        Loading...
       </div>
     )
   }

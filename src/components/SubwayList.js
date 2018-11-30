@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { connect } from 'react-redux'
 import { fetchMtaData } from '../Redux/actioncreators.js'
+import {withRouter} from 'react-router-dom'
 
 
 
@@ -9,38 +10,32 @@ const SubwayList = (props) => {
   let subways = ['', '1', '2', '3', '4', '5', '6',
 	'S', 'A', 'C', 'E', 'B', 'D', 'F', 'M', 'N', 'Q', 'R', 'L', 'G']
 
-const handleChange =(e) => {
+const handleClick =(e) => {
   // depending on what the user choice was i'm going to fetch the data feed for that specific train
-  switch (e.target.value) {
+  switch (e.target.innerText) {
   		case '1': case '2': case '3': case '4': case '5': case '6': case 'S':
-        return props.fetchMtaData(1,e.target.value)
+        props.fetchMtaData(1,e.target.innerText)
+        return props.history.push(`/trains/${e.target.innerText}`)
   		case 'A': case 'C': case 'E':
-        return props.fetchMtaData(26,e.target.value)
+        return props.fetchMtaData(26,e.target.innerText)
   		case 'N': case 'Q': case 'R': case 'W':
-        return props.fetchMtaData(16,e.target.value)
+        return props.fetchMtaData(16,e.target.innerText)
   		case 'B': case 'D': case 'F': case 'M':
-        return props.fetchMtaData(21,e.target.value)
+        return props.fetchMtaData(21,e.target.innerText)
       case 'L':
-        return props.fetchMtaData(2,e.target.value)
+        return props.fetchMtaData(2,e.target.innerText)
   		case 'G':
-        return props.fetchMtaData(31,e.target.value)
+        return props.fetchMtaData(31,e.target.innerText)
   	}
 }
 
   return (
-    <select onChange={ (e) => handleChange(e) }>
-      {
-				subways.map(subway =>
-					<option key={subway}>
-						{subway}
-					</option>
-				)
-			}
-
-    </select>
+    <Fragment>
+      {subways.map(subway => <div onClick={(e) => handleClick(e)}> {subway} </div>)}
+    </Fragment>
   );
 
 
 }
 
-export default connect(null,{ fetchMtaData })(SubwayList);
+export default withRouter(connect(null,{ fetchMtaData })(SubwayList))
