@@ -1,4 +1,5 @@
-[
+const stops =
+  [
   {
   "stop_id": 101,
   "stop_code": "",
@@ -18036,3 +18037,5 @@
   "parent_station": "S31"
   }
 ]
+
+export default stops
